@@ -1,0 +1,11 @@
+{
+  "radio_stream": {
+    "sounds": [
+      {
+        "name": "minecraft:random/click",
+        "stream": true,
+        "attenuation_distance": 32
+      }
+    ]
+  }
+}

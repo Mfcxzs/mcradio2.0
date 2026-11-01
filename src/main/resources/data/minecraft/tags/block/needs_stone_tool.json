@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "mcradio:signal_station",
+    "mcradio:signal_transmitter",
+    "mcradio:signal_repeater",
+    "mcradio:signal_receiver",
+    "mcradio:signal_computer",
+    "mcradio:signal_jammer"
+  ]
+}

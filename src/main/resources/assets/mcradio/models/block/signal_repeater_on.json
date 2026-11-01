@@ -1,0 +1,6 @@
+{
+  "parent": "mcradio:block/signal_repeater",
+  "textures": {
+    "front": "mcradio:block/repeater_front_on"
+  }
+}

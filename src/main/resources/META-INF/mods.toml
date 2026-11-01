@@ -1,0 +1,27 @@
+modLoader = "javafml"
+loaderVersion = "[52,)"
+license = "MIT"
+
+[[mods]]
+modId = "mcradio"
+version = "1.0.0"
+displayName = "MC Radio"
+description = '''
+A radio system: broadcast stations stream MP3 playlists or live microphone audio on a
+frequency, transmitters extend range, repeaters relay signals, receivers play them back in-world.
+Put .mp3 files into config/mc_radio/tracks/ on the machine that hosts the world.
+'''
+
+[[dependencies.mcradio]]
+modId = "forge"
+mandatory = true
+versionRange = "[52,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.mcradio]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.21.1,1.22)"
+ordering = "NONE"
+side = "BOTH"

@@ -1,0 +1,6 @@
+{
+  "parent": "mcradio:block/signal_jammer",
+  "textures": {
+    "top": "mcradio:block/jammer_top_on"
+  }
+}

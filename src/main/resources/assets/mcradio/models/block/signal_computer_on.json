@@ -1,0 +1,6 @@
+{
+  "parent": "mcradio:block/signal_computer",
+  "textures": {
+    "front": "mcradio:block/computer_front_on"
+  }
+}

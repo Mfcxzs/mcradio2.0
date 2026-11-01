@@ -1,0 +1,6 @@
+{
+  "parent": "mcradio:block/signal_station",
+  "textures": {
+    "front": "mcradio:block/station_front_on"
+  }
+}

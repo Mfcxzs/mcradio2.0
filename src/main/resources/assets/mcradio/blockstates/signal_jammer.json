@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "mcradio:block/signal_jammer"
+    },
+    "active=true": {
+      "model": "mcradio:block/signal_jammer_on"
+    }
+  }
+}

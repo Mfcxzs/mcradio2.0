@@ -1,0 +1,6 @@
+{
+  "parent": "mcradio:block/signal_receiver",
+  "textures": {
+    "front": "mcradio:block/receiver_front_on"
+  }
+}

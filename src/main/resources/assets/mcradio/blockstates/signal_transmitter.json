@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "mcradio:block/signal_transmitter"
+    }
+  }
+}
