@@ -4,22 +4,22 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
 }
-
+ 
 version = mod_version
 group = mod_group_id
-
+ 
 base {
     archivesName = mod_id
 }
-
+ 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
-
+ 
 jarJar.enable()
-
+ 
 minecraft {
     mappings channel: 'official', version: minecraft_version
     copyIdeResources = true
-
+ 
     runs {
         configureEach {
             workingDirectory project.file('run')
@@ -40,21 +40,21 @@ minecraft {
         }
     }
 }
-
+ 
 repositories {
     mavenCentral()
 }
-
+ 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
+ 
     // JLayer: pure-Java MP3 decoder, used on the client (decoding) and server (duration scan).
     implementation 'com.googlecode.soundlibs:jlayer:1.0.1.4'
     jarJar(group: 'com.googlecode.soundlibs', name: 'jlayer', version: '[1.0.1.4,1.1)') {
         jarJar.pin(it, '1.0.1.4')
     }
 }
-
+ 
 tasks.named('jar', Jar).configure {
     archiveClassifier = 'slim'
     manifest {
@@ -67,22 +67,17 @@ tasks.named('jar', Jar).configure {
             'Implementation-Vendor'   : 'mcradio'
         ])
     }
-    finalizedBy 'reobfJar'
 }
-
+ 
 tasks.named('jarJar').configure {
     archiveClassifier = ''
-    finalizedBy 'reobfJarJar'
 }
-
-reobf {
-    jarJar { }
-}
-
+ 
 tasks.named('build').configure {
     dependsOn 'jarJar'
 }
-
+ 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
+ 
