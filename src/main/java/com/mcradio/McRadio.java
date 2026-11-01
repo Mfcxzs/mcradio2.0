@@ -72,6 +72,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.Packet;
@@ -478,7 +479,7 @@ public final class McRadio {
 
     /** Serverbound: the open station GUI asks for the list of MP3 files in {@code config/mc_radio/tracks/}. */
     public static record TrackListRequestPacket() {
-        public static final StreamCodec<FriendlyByteBuf, TrackListRequestPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, TrackListRequestPacket> CODEC =
                 StreamCodec.unit(new TrackListRequestPacket());
 
         public static void handle(TrackListRequestPacket message, CustomPayloadEvent.Context context) {
@@ -495,7 +496,7 @@ public final class McRadio {
 
     /** Clientbound: file names available on the server. */
     public static record TrackListPacket(List<String> tracks) {
-        public static final StreamCodec<FriendlyByteBuf, TrackListPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, TrackListPacket> CODEC =
                 StreamCodec.ofMember(TrackListPacket::write, TrackListPacket::new);
 
         public TrackListPacket(FriendlyByteBuf buf) {
@@ -550,7 +551,7 @@ public final class McRadio {
             COMPUTER_UNLINK
         }
 
-        public static final StreamCodec<FriendlyByteBuf, ConfigPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, ConfigPacket> CODEC =
                 StreamCodec.ofMember(ConfigPacket::write, ConfigPacket::new);
 
         public ConfigPacket(FriendlyByteBuf buf) {
@@ -652,7 +653,7 @@ public final class McRadio {
     public static record LiveAudioPacket(BlockPos pos, byte[] data) {
         public static final int MAX_BYTES = 4096;
 
-        public static final StreamCodec<FriendlyByteBuf, LiveAudioPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, LiveAudioPacket> CODEC =
                 StreamCodec.ofMember(LiveAudioPacket::write, LiveAudioPacket::new);
 
         public LiveAudioPacket(FriendlyByteBuf buf) {
@@ -691,7 +692,7 @@ public final class McRadio {
     public static record AudioChunkPacket(long station, int codec, byte[] data) {
         public static final int MAX_BYTES = 262144;
 
-        public static final StreamCodec<FriendlyByteBuf, AudioChunkPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, AudioChunkPacket> CODEC =
                 StreamCodec.ofMember(AudioChunkPacket::write, AudioChunkPacket::new);
 
         public AudioChunkPacket(FriendlyByteBuf buf) {
@@ -713,7 +714,7 @@ public final class McRadio {
 
     /** Clientbound: the station stopped (or changed mode); drop the stream and its decoder. */
     public static record StreamEndPacket(long station) {
-        public static final StreamCodec<FriendlyByteBuf, StreamEndPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, StreamEndPacket> CODEC =
                 StreamCodec.ofMember(StreamEndPacket::write, StreamEndPacket::new);
 
         public StreamEndPacket(FriendlyByteBuf buf) {
@@ -733,7 +734,7 @@ public final class McRadio {
 
     /** Clientbound: a typed message from a station in live mode, shown in chat to players near tuned receivers. */
     public static record RadioTextPacket(int frequency, String sender, String text) {
-        public static final StreamCodec<FriendlyByteBuf, RadioTextPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, RadioTextPacket> CODEC =
                 StreamCodec.ofMember(RadioTextPacket::write, RadioTextPacket::new);
 
         public RadioTextPacket(FriendlyByteBuf buf) {
@@ -755,7 +756,7 @@ public final class McRadio {
 
     /** Serverbound: set the frequency of the walkie-talkie the player holds in the given hand. */
     public static record WalkieConfigPacket(InteractionHand hand, int frequency) {
-        public static final StreamCodec<FriendlyByteBuf, WalkieConfigPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, WalkieConfigPacket> CODEC =
                 StreamCodec.ofMember(WalkieConfigPacket::write, WalkieConfigPacket::new);
 
         public WalkieConfigPacket(FriendlyByteBuf buf) {
@@ -787,7 +788,7 @@ public final class McRadio {
     public static record WalkieVoicePacket(byte[] data) {
         public static final int MAX_BYTES = 4096;
 
-        public static final StreamCodec<FriendlyByteBuf, WalkieVoicePacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, WalkieVoicePacket> CODEC =
                 StreamCodec.ofMember(WalkieVoicePacket::write, WalkieVoicePacket::new);
 
         public WalkieVoicePacket(FriendlyByteBuf buf) {
@@ -822,7 +823,7 @@ public final class McRadio {
     public static record VoiceChunkPacket(UUID speaker, String name, int frequency, int mode, byte[] data) {
         public static final int MAX_BYTES = 4096;
 
-        public static final StreamCodec<FriendlyByteBuf, VoiceChunkPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, VoiceChunkPacket> CODEC =
                 StreamCodec.ofMember(VoiceChunkPacket::write, VoiceChunkPacket::new);
 
         public VoiceChunkPacket(FriendlyByteBuf buf) {
@@ -847,7 +848,7 @@ public final class McRadio {
 
     /** Serverbound: the tablet asks for all radio devices of the player's dimension. */
     public static record MapRequestPacket() {
-        public static final StreamCodec<FriendlyByteBuf, MapRequestPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, MapRequestPacket> CODEC =
                 StreamCodec.unit(new MapRequestPacket());
 
         public static void handle(MapRequestPacket message, CustomPayloadEvent.Context context) {
@@ -879,7 +880,7 @@ public final class McRadio {
         public record Node(int kind, BlockPos pos, int a, int b, int radius, boolean active) {
         }
 
-        public static final StreamCodec<FriendlyByteBuf, MapDataPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, MapDataPacket> CODEC =
                 StreamCodec.ofMember(MapDataPacket::write, MapDataPacket::new);
 
         public MapDataPacket(FriendlyByteBuf buf) {
@@ -922,7 +923,7 @@ public final class McRadio {
 
     /** Serverbound: a computer GUI asks for the distributors it could connect to. */
     public static record StationListRequestPacket() {
-        public static final StreamCodec<FriendlyByteBuf, StationListRequestPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, StationListRequestPacket> CODEC =
                 StreamCodec.unit(new StationListRequestPacket());
 
         public static void handle(StationListRequestPacket message, CustomPayloadEvent.Context context) {
@@ -948,7 +949,7 @@ public final class McRadio {
         public record Entry(BlockPos pos, int frequency, boolean onAir) {
         }
 
-        public static final StreamCodec<FriendlyByteBuf, StationListPacket> CODEC =
+        public static final StreamCodec<RegistryFriendlyByteBuf, StationListPacket> CODEC =
                 StreamCodec.ofMember(StationListPacket::write, StationListPacket::new);
 
         public StationListPacket(FriendlyByteBuf buf) {
@@ -4647,3 +4648,6 @@ public final class McRadio {
                 graphics.fill(ix - half, iy - half, ix + half + 1, iy + half + 1, argb);
             }
         }
+    }
+
+}
