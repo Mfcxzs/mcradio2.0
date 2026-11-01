@@ -3187,7 +3187,7 @@ public final class McRadio {
                         bitstream.closeFrame();
                     }
                 }
-            } catch (JavaLayerException | RuntimeException e) {
+            } catch (RuntimeException e) {
                 if (!closed) {
                     McRadio.LOGGER.debug("MP3 decoder for station {} stopped", station, e);
                 }
