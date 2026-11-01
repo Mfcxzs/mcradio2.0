@@ -4647,6 +4647,3 @@ public final class McRadio {
                 graphics.fill(ix - half, iy - half, ix + half + 1, iy + half + 1, argb);
             }
         }
-    }
-
-}
